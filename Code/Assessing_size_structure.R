@@ -63,6 +63,10 @@ TamakinDacot <- 16
 Visca <- 17
 Wangag <- 18
 
+#other thresholds or constants
+clip_min <- 3.5 #minimum size for fin-clip (need to double-check this...)
+tag_min <- 6.0 #minimum size for tagging (need to double-check)
+
 #################### Functions: ####################
 ##### Functions from Michelle's GitHub
 #helper functions - do various tasks w/database (like assigning dates and site to fish and such)
@@ -190,6 +194,123 @@ ggplot(data = (fishInfo %>% filter(dive_type %in% c("C","R"))), aes(size_num, fi
   geom_histogram(data = (fishInfo %>% filter(dive_type == "R")), alpha = 0.5, binwidth = 1) +
   facet_grid(.~ year) +
   xlab("size (cm)") + ylab("# fish") + ggtitle("Size histograms for fish from C and R dives (all sites combined)") +
+  theme_bw()
+dev.off()
+
+##### Comparing sites
+pdf(file = here("Plots/Size_structure", "SitesCDE_allyears.pdf"))
+ggplot(data = (fishInfo %>% filter(dive_type %in% c("C","D","E"))), aes(size_num, fill = site)) +
+  geom_histogram(data = (fishInfo %>% filter(site == site_vec[1], dive_type %in% c("C","D","E"))), alpha = 0.5, binwidth = 1) +
+  geom_histogram(data = (fishInfo %>% filter(site == site_vec[2], dive_type %in% c("C","D","E"))), alpha = 0.5, binwidth = 1) +
+  geom_histogram(data = (fishInfo %>% filter(site == site_vec[3], dive_type %in% c("C","D","E"))), alpha = 0.5, binwidth = 1) +
+  geom_histogram(data = (fishInfo %>% filter(site == site_vec[4], dive_type %in% c("C","D","E"))), alpha = 0.5, binwidth = 1) +
+  geom_histogram(data = (fishInfo %>% filter(site == site_vec[5], dive_type %in% c("C","D","E"))), alpha = 0.5, binwidth = 1) +
+  geom_histogram(data = (fishInfo %>% filter(site == site_vec[6], dive_type %in% c("C","D","E"))), alpha = 0.5, binwidth = 1) +
+  geom_histogram(data = (fishInfo %>% filter(site == site_vec[7], dive_type %in% c("C","D","E"))), alpha = 0.5, binwidth = 1) +
+  geom_histogram(data = (fishInfo %>% filter(site == site_vec[8], dive_type %in% c("C","D","E"))), alpha = 0.5, binwidth = 1) +
+  geom_histogram(data = (fishInfo %>% filter(site == site_vec[9], dive_type %in% c("C","D","E"))), alpha = 0.5, binwidth = 1) +
+  geom_histogram(data = (fishInfo %>% filter(site == site_vec[10], dive_type %in% c("C","D","E"))), alpha = 0.5, binwidth = 1) +
+  geom_histogram(data = (fishInfo %>% filter(site == site_vec[11], dive_type %in% c("C","D","E"))), alpha = 0.5, binwidth = 1) +
+  geom_histogram(data = (fishInfo %>% filter(site == site_vec[12], dive_type %in% c("C","D","E"))), alpha = 0.5, binwidth = 1) +
+  geom_histogram(data = (fishInfo %>% filter(site == site_vec[13], dive_type %in% c("C","D","E"))), alpha = 0.5, binwidth = 1) +
+  geom_histogram(data = (fishInfo %>% filter(site == site_vec[14], dive_type %in% c("C","D","E"))), alpha = 0.5, binwidth = 1) +
+  geom_histogram(data = (fishInfo %>% filter(site == site_vec[15], dive_type %in% c("C","D","E"))), alpha = 0.5, binwidth = 1) +
+  geom_histogram(data = (fishInfo %>% filter(site == site_vec[16], dive_type %in% c("C","D","E"))), alpha = 0.5, binwidth = 1) +
+  geom_histogram(data = (fishInfo %>% filter(site == site_vec[17], dive_type %in% c("C","D","E"))), alpha = 0.5, binwidth = 1) +
+  geom_histogram(data = (fishInfo %>% filter(site == site_vec[18], dive_type %in% c("C","D","E"))), alpha = 0.5, binwidth = 1) +
+  #facet_grid(.~ year) +
+  xlab("size (cm)") + ylab("# fish") + ggtitle("C,D,E dives by site, all years combined") +
+  theme_bw()
+dev.off()
+
+# All sites on top of each other, by year
+pdf(file = here("Plots/Size_structure", "SitesCDE_byyear.pdf"))
+ggplot(data = (fishInfo %>% filter(dive_type %in% c("C","D","E"))), aes(size_num, fill = site)) +
+  geom_histogram(data = (fishInfo %>% filter(site == site_vec[1], dive_type %in% c("C","D","E"))), alpha = 0.5, binwidth = 1) +
+  geom_histogram(data = (fishInfo %>% filter(site == site_vec[2], dive_type %in% c("C","D","E"))), alpha = 0.5, binwidth = 1) +
+  geom_histogram(data = (fishInfo %>% filter(site == site_vec[3], dive_type %in% c("C","D","E"))), alpha = 0.5, binwidth = 1) +
+  geom_histogram(data = (fishInfo %>% filter(site == site_vec[4], dive_type %in% c("C","D","E"))), alpha = 0.5, binwidth = 1) +
+  geom_histogram(data = (fishInfo %>% filter(site == site_vec[5], dive_type %in% c("C","D","E"))), alpha = 0.5, binwidth = 1) +
+  geom_histogram(data = (fishInfo %>% filter(site == site_vec[6], dive_type %in% c("C","D","E"))), alpha = 0.5, binwidth = 1) +
+  geom_histogram(data = (fishInfo %>% filter(site == site_vec[7], dive_type %in% c("C","D","E"))), alpha = 0.5, binwidth = 1) +
+  geom_histogram(data = (fishInfo %>% filter(site == site_vec[8], dive_type %in% c("C","D","E"))), alpha = 0.5, binwidth = 1) +
+  geom_histogram(data = (fishInfo %>% filter(site == site_vec[9], dive_type %in% c("C","D","E"))), alpha = 0.5, binwidth = 1) +
+  geom_histogram(data = (fishInfo %>% filter(site == site_vec[10], dive_type %in% c("C","D","E"))), alpha = 0.5, binwidth = 1) +
+  geom_histogram(data = (fishInfo %>% filter(site == site_vec[11], dive_type %in% c("C","D","E"))), alpha = 0.5, binwidth = 1) +
+  geom_histogram(data = (fishInfo %>% filter(site == site_vec[12], dive_type %in% c("C","D","E"))), alpha = 0.5, binwidth = 1) +
+  geom_histogram(data = (fishInfo %>% filter(site == site_vec[13], dive_type %in% c("C","D","E"))), alpha = 0.5, binwidth = 1) +
+  geom_histogram(data = (fishInfo %>% filter(site == site_vec[14], dive_type %in% c("C","D","E"))), alpha = 0.5, binwidth = 1) +
+  geom_histogram(data = (fishInfo %>% filter(site == site_vec[15], dive_type %in% c("C","D","E"))), alpha = 0.5, binwidth = 1) +
+  geom_histogram(data = (fishInfo %>% filter(site == site_vec[16], dive_type %in% c("C","D","E"))), alpha = 0.5, binwidth = 1) +
+  geom_histogram(data = (fishInfo %>% filter(site == site_vec[17], dive_type %in% c("C","D","E"))), alpha = 0.5, binwidth = 1) +
+  geom_histogram(data = (fishInfo %>% filter(site == site_vec[18], dive_type %in% c("C","D","E"))), alpha = 0.5, binwidth = 1) +
+  facet_grid(.~ year) +
+  xlab("size (cm)") + ylab("# fish") + ggtitle("C,D,E dives by site and year") +
+  theme_bw()
+dev.off()
+
+##### Look just at small fish (below tagging size)
+# All sites on top of each other, by year, just below-clip sized fish
+pdf(file = here("Plots/Size_structure", "SitesADE_belowclipsize_byyear.pdf"))
+ggplot(data = (fishInfo %>% filter(dive_type %in% c("A","D","E"))), aes(size_num, fill = site)) +
+  geom_histogram(data = (fishInfo %>% filter(site == site_vec[1], dive_type %in% c("A","D","E"), size_num <= clip_min)), alpha = 0.5, binwidth = 1) +
+  geom_histogram(data = (fishInfo %>% filter(site == site_vec[2], dive_type %in% c("A","D","E"), size_num <= clip_min)), alpha = 0.5, binwidth = 1) +
+  geom_histogram(data = (fishInfo %>% filter(site == site_vec[3], dive_type %in% c("A","D","E"), size_num <= clip_min)), alpha = 0.5, binwidth = 1) +
+  geom_histogram(data = (fishInfo %>% filter(site == site_vec[4], dive_type %in% c("A","D","E"), size_num <= clip_min)), alpha = 0.5, binwidth = 1) +
+  geom_histogram(data = (fishInfo %>% filter(site == site_vec[5], dive_type %in% c("A","D","E"), size_num <= clip_min)), alpha = 0.5, binwidth = 1) +
+  geom_histogram(data = (fishInfo %>% filter(site == site_vec[6], dive_type %in% c("A","D","E"), size_num <= clip_min)), alpha = 0.5, binwidth = 1) +
+  geom_histogram(data = (fishInfo %>% filter(site == site_vec[7], dive_type %in% c("A","D","E"), size_num <= clip_min)), alpha = 0.5, binwidth = 1) +
+  geom_histogram(data = (fishInfo %>% filter(site == site_vec[8], dive_type %in% c("A","D","E"), size_num <= clip_min)), alpha = 0.5, binwidth = 1) +
+  geom_histogram(data = (fishInfo %>% filter(site == site_vec[9], dive_type %in% c("A","D","E"), size_num <= clip_min)), alpha = 0.5, binwidth = 1) +
+  geom_histogram(data = (fishInfo %>% filter(site == site_vec[10], dive_type %in% c("A","D","E"), size_num <= clip_min)), alpha = 0.5, binwidth = 1) +
+  geom_histogram(data = (fishInfo %>% filter(site == site_vec[11], dive_type %in% c("A","D","E"), size_num <= clip_min)), alpha = 0.5, binwidth = 1) +
+  geom_histogram(data = (fishInfo %>% filter(site == site_vec[12], dive_type %in% c("A","D","E"), size_num <= clip_min)), alpha = 0.5, binwidth = 1) +
+  geom_histogram(data = (fishInfo %>% filter(site == site_vec[13], dive_type %in% c("A","D","E"), size_num <= clip_min)), alpha = 0.5, binwidth = 1) +
+  geom_histogram(data = (fishInfo %>% filter(site == site_vec[14], dive_type %in% c("A","D","E"), size_num <= clip_min)), alpha = 0.5, binwidth = 1) +
+  geom_histogram(data = (fishInfo %>% filter(site == site_vec[15], dive_type %in% c("A","D","E"), size_num <= clip_min)), alpha = 0.5, binwidth = 1) +
+  geom_histogram(data = (fishInfo %>% filter(site == site_vec[16], dive_type %in% c("A","D","E"), size_num <= clip_min)), alpha = 0.5, binwidth = 1) +
+  geom_histogram(data = (fishInfo %>% filter(site == site_vec[17], dive_type %in% c("A","D","E"), size_num <= clip_min)), alpha = 0.5, binwidth = 1) +
+  geom_histogram(data = (fishInfo %>% filter(site == site_vec[18], dive_type %in% c("A","D","E"), size_num <= clip_min)), alpha = 0.5, binwidth = 1) +
+  facet_grid(.~ year) +
+  xlab("size (cm)") + ylab("# fish") + ggtitle("A,D,E dives by site and year, <= min clip size") +
+  theme_bw()
+dev.off()
+
+# All sites on top of each other, by year, just below-clip sized fish, just C (and D+E)
+pdf(file = here("Plots/Size_structure", "SitesCDE_belowclipsize_byyear.pdf"))
+ggplot(data = (fishInfo %>% filter(dive_type %in% c("C","D","E"))), aes(size_num, fill = site)) +
+  geom_histogram(data = (fishInfo %>% filter(site == site_vec[1], dive_type %in% c("C","D","E"), size_num <= clip_min)), alpha = 0.5, binwidth = 1) +
+  geom_histogram(data = (fishInfo %>% filter(site == site_vec[2], dive_type %in% c("C","D","E"), size_num <= clip_min)), alpha = 0.5, binwidth = 1) +
+  geom_histogram(data = (fishInfo %>% filter(site == site_vec[3], dive_type %in% c("C","D","E"), size_num <= clip_min)), alpha = 0.5, binwidth = 1) +
+  geom_histogram(data = (fishInfo %>% filter(site == site_vec[4], dive_type %in% c("C","D","E"), size_num <= clip_min)), alpha = 0.5, binwidth = 1) +
+  geom_histogram(data = (fishInfo %>% filter(site == site_vec[5], dive_type %in% c("C","D","E"), size_num <= clip_min)), alpha = 0.5, binwidth = 1) +
+  geom_histogram(data = (fishInfo %>% filter(site == site_vec[6], dive_type %in% c("C","D","E"), size_num <= clip_min)), alpha = 0.5, binwidth = 1) +
+  geom_histogram(data = (fishInfo %>% filter(site == site_vec[7], dive_type %in% c("C","D","E"), size_num <= clip_min)), alpha = 0.5, binwidth = 1) +
+  geom_histogram(data = (fishInfo %>% filter(site == site_vec[8], dive_type %in% c("C","D","E"), size_num <= clip_min)), alpha = 0.5, binwidth = 1) +
+  geom_histogram(data = (fishInfo %>% filter(site == site_vec[9], dive_type %in% c("C","D","E"), size_num <= clip_min)), alpha = 0.5, binwidth = 1) +
+  geom_histogram(data = (fishInfo %>% filter(site == site_vec[10], dive_type %in% c("C","D","E"), size_num <= clip_min)), alpha = 0.5, binwidth = 1) +
+  geom_histogram(data = (fishInfo %>% filter(site == site_vec[11], dive_type %in% c("C","D","E"), size_num <= clip_min)), alpha = 0.5, binwidth = 1) +
+  geom_histogram(data = (fishInfo %>% filter(site == site_vec[12], dive_type %in% c("C","D","E"), size_num <= clip_min)), alpha = 0.5, binwidth = 1) +
+  geom_histogram(data = (fishInfo %>% filter(site == site_vec[13], dive_type %in% c("C","D","E"), size_num <= clip_min)), alpha = 0.5, binwidth = 1) +
+  geom_histogram(data = (fishInfo %>% filter(site == site_vec[14], dive_type %in% c("C","D","E"), size_num <= clip_min)), alpha = 0.5, binwidth = 1) +
+  geom_histogram(data = (fishInfo %>% filter(site == site_vec[15], dive_type %in% c("C","D","E"), size_num <= clip_min)), alpha = 0.5, binwidth = 1) +
+  geom_histogram(data = (fishInfo %>% filter(site == site_vec[16], dive_type %in% c("C","D","E"), size_num <= clip_min)), alpha = 0.5, binwidth = 1) +
+  geom_histogram(data = (fishInfo %>% filter(site == site_vec[17], dive_type %in% c("C","D","E"), size_num <= clip_min)), alpha = 0.5, binwidth = 1) +
+  geom_histogram(data = (fishInfo %>% filter(site == site_vec[18], dive_type %in% c("C","D","E"), size_num <= clip_min)), alpha = 0.5, binwidth = 1) +
+  facet_grid(.~ year) +
+  xlab("size (cm)") + ylab("# fish") + ggtitle("C,D,E dives by site and year, <= min clip size") +
+  theme_bw()
+dev.off()
+
+# All sites combined, by year, <= min clip size, separated by survey
+pdf(file = here("Plots/Size_structure", "ACDE_belowclipsize_byyear.pdf"))
+ggplot(data = (fishInfo %>% filter(dive_type %in% c("A","C","D","E"))), aes(size_num, fill = dive_type)) +
+  geom_histogram(data = (fishInfo %>% filter(dive_type == "A", size_num <= clip_min)), alpha = 0.5, binwidth = 1) +
+  geom_histogram(data = (fishInfo %>% filter(dive_type == "C", size_num <= clip_min)), alpha = 0.5, binwidth = 1) +
+  geom_histogram(data = (fishInfo %>% filter(dive_type == "D", size_num <= clip_min)), alpha = 0.5, binwidth = 1) +
+  geom_histogram(data = (fishInfo %>% filter(dive_type == "E", size_num <= clip_min)), alpha = 0.5, binwidth = 1) +
+  facet_grid(.~ year) +
+  xlab("size (cm)") + ylab("# fish") + ggtitle("A,C,D,E dives by type and year, <= min clip size, all sites comb") +
   theme_bw()
 dev.off()
 
