@@ -1,0 +1,9 @@
+List of database errors, typos, or inconsistencies to fix at some point
+
+fish_table_id = 9753 has a size marked 12. 12 with an extra space after the decimal point 
+fish_table_id = 8098 has a size marked 4.4000000000000004 
+fish_table_id = 8077 has a size marked 8.1999999999999993
+fish_table_id = 10807 has a size marked 06 (maybe supposed to be 0.6?)
+
+
+
