@@ -35,7 +35,7 @@ findCompOccupancyByYear <- function(year_val, month_vals, divetype_vals, allanem
   #filter out just the relevant year and months
   allanemsdf_filt <- allanemsdf %>% filter(year == year_val) # filter by year
   allanemsdf_filt <- allanemsdf_filt %>% filter(month %in% month_vals) #filter by months
-  allanemsdf_filt <- allanemsdf_filt %>% filter(divetype %in% divetype_vals) #filter by dive types
+  allanemsdf_filt <- allanemsdf_filt %>% filter(dive_type %in% divetype_vals) #filter by dive types
   
   #limit to one obs per anemone_table_id (think this through a bit more - ideally this gets one row per fish spp per anem; are there some anems showing up more than that? like if they were visited multiple times per season?)
   allanemsdf_distinct <- allanemsdf_filt %>% distinct(anem_table_id, dive_table_id, anem_id, anem_obs, old_anem_id, anem_spp, obs_time, fish_spp, dive_type, date, site, gps, year, month)
@@ -115,7 +115,7 @@ anems_2017 <- allanems %>% filter(year == 2017) #0,A,C,R dive types; 5,6 month
 months_all <- c(1,2,3,4,5,6,7,8,9,10,11,12)
 dives_all <- c("A","C","D","E","F","M","R","0") 
 dives_no0 <- c("A","C","D","E","F","M","R") 
-dives_nor0orR <-  c("A","C","D","E","F","M") 
+dives_no0orR <-  c("A","C","D","E","F","M") 
 #A=anemone survey dive, C=clownfish collection dive, D=clownfish collection dive with transet (2012), E=clownfish collection with transect and mapping fish survey (2012), 
 #F=fish transet with quadrats for coral survey, M=mapping fish survey with transect (2012), R=recapture survey, 0=none of the above
 winter_2015 <- c(1,2) #this is the season that was focused anemone surveys
@@ -152,7 +152,11 @@ anemOcc_2014_no0$Season <- rep("All", length(anemOcc_2014_no0$Var1), 1)
 anemOcc_2014_no0$Divetype <- rep("No0", length(anemOcc_2014_no0$Var1), 1)
 anemOcc_2014_no0$Year <- rep(2014, length(anemOcc_2014_no0$Var1), 1)
 anemOcc_2015winter$Season <- rep("Winter", length(anemOcc_2015winter$Var1), 1)
+anemOcc_2015winter$Divetype <- rep("All", length(anemOcc_2015winter$Var1), 1)
+anemOcc_2015winter$Year <- rep(2015, length(anemOcc_2015winter$Var1), 1)
 anemOcc_2015spring$Season <- rep("Spring", length(anemOcc_2015spring$Var1), 1)
+anemOcc_2015spring$Divetype <- rep("All", length(anemOcc_2015spring$Var1), 1)
+anemOcc_2015spring$Year <- rep(2015, length(anemOcc_2015spring$Var1), 1)
 anemOcc_2016$Season <- rep("All", length(anemOcc_2016$Var1), 1)
 anemOcc_2016$Divetype <- rep("All", length(anemOcc_2016$Var1), 1)
 anemOcc_2016$Year <- rep(2016, length(anemOcc_2016$Var1), 1)
@@ -170,7 +174,84 @@ anemOcc_2017_no0R$Year <- rep(2017, length(anemOcc_2017_no0R$Var1), 1)
 anemOcc <- rbind(anemOcc_2012, anemOcc_2013, anemOcc_2013_no0, anemOcc_2014, anemOcc_2014_no0, anemOcc_2015winter, anemOcc_2015spring,
                  anemOcc_2016, anemOcc_2016_no0R, anemOcc_2017, anemOcc_2017_no0R)
 
+##### Do 2015 winter surveys by site
+# Cabatoan
+anemOcc_2015W_Cab <- findCompOccupancyByYear(2015, winter_2015, dives_2015, (allanems %>% filter(site == site_vec[1])))
+anemOcc_2015W_Cab$Site <- rep(site_vec[1], length(anemOcc_2015W_Cab$Var1), 1)
 
+# Caridad Cemetery
+anemOcc_2015W_CarC <- findCompOccupancyByYear(2015, winter_2015, dives_2015, (allanems %>% filter(site == site_vec[2])))
+anemOcc_2015W_CarC$Site <- rep(site_vec[2], length(anemOcc_2015W_CarC$Var1), 1)
+
+# Caridad Proper
+anemOcc_2015W_CarP <- findCompOccupancyByYear(2015, winter_2015, dives_2015, (allanems %>% filter(site == site_vec[3])))
+anemOcc_2015W_CarP$Site <- rep(site_vec[3], length(anemOcc_2015W_CarC$Var1), 1)
+
+# Elementary School
+anemOcc_2015W_Ele <- findCompOccupancyByYear(2015, winter_2015, dives_2015, (allanems %>% filter(site == site_vec[4])))
+anemOcc_2015W_Ele$Site <- rep(site_vec[4], length(anemOcc_2015W_Ele$Var1), 1)
+
+# Gabas
+anemOcc_2015W_Gab <- findCompOccupancyByYear(2015, winter_2015, dives_2015, (allanems %>% filter(site == site_vec[5])))
+anemOcc_2015W_Gab$Site <- rep(site_vec[5], length(anemOcc_2015W_Gab$Var1), 1)
+
+# Haina
+anemOcc_2015W_Hai <- findCompOccupancyByYear(2015, winter_2015, dives_2015, (allanems %>% filter(site == site_vec[6])))
+anemOcc_2015W_Hai$Site <- rep(site_vec[6], length(anemOcc_2015W_Hai$Var1), 1)
+
+# Hicgop South
+anemOcc_2015W_Hic <- findCompOccupancyByYear(2015, winter_2015, dives_2015, (allanems %>% filter(site == site_vec[7])))
+anemOcc_2015W_Hic$Site <- rep(site_vec[7], length(anemOcc_2015W_Hic$Var1), 1)
+
+# Magbangon
+anemOcc_2015W_Mag <- findCompOccupancyByYear(2015, winter_2015, dives_2015, (allanems %>% filter(site == site_vec[8])))
+anemOcc_2015W_Mag$Site <- rep(site_vec[8], length(anemOcc_2015W_Mag$Var1), 1)
+
+# Palanas
+anemOcc_2015W_Pal <- findCompOccupancyByYear(2015, winter_2015, dives_2015, (allanems %>% filter(site == site_vec[9])))
+anemOcc_2015W_Pal$Site <- rep(site_vec[9], length(anemOcc_2015W_Pal$Var1), 1)
+
+# Poroc Rose
+anemOcc_2015W_PorR <- findCompOccupancyByYear(2015, winter_2015, dives_2015, (allanems %>% filter(site == site_vec[10])))
+anemOcc_2015W_PorR$Site <- rep(site_vec[10], length(anemOcc_2015W_PorR$Var1), 1)
+
+# Poroc San Flower
+anemOcc_2015W_PorSF <- findCompOccupancyByYear(2015, winter_2015, dives_2015, (allanems %>% filter(site == site_vec[11])))
+anemOcc_2015W_PorSF$Site <- rep(site_vec[11], length(anemOcc_2015W_PorSF$Var1), 1)
+
+# San Agustin
+anemOcc_2015W_SanA <- findCompOccupancyByYear(2015, winter_2015, dives_2015, (allanems %>% filter(site == site_vec[12])))
+anemOcc_2015W_SanA$Site <- rep(site_vec[12], length(anemOcc_2015W_SanA$Var1), 1)
+
+# Sitio Baybayon
+anemOcc_2015W_SitB <- findCompOccupancyByYear(2015, winter_2015, dives_2015, (allanems %>% filter(site == site_vec[13])))
+anemOcc_2015W_SitB$Site <- rep(site_vec[13], length(anemOcc_2015W_SitB$Var1), 1)
+
+# Sitio Lonas - no anems seen...
+anemOcc_2015W_SitL <- findCompOccupancyByYear(2015, winter_2015, dives_2015, (allanems %>% filter(site == site_vec[14])))
+anemOcc_2015W_SitL$Site <- rep(site_vec[14], length(anemOcc_2015W_SitL$Var1), 1)
+
+# Sitio Tugas - no anems seen...
+anemOcc_2015W_SitT <- findCompOccupancyByYear(2015, winter_2015, dives_2015, (allanems %>% filter(site == site_vec[15])))
+anemOcc_2015W_SitT$Site <- rep(site_vec[15], length(anemOcc_2015W_SitT$Var1), 1)
+
+# Tamakin Dacot
+anemOcc_2015W_TamD <- findCompOccupancyByYear(2015, winter_2015, dives_2015, (allanems %>% filter(site == site_vec[16])))
+anemOcc_2015W_TamD$Site <- rep(site_vec[16], length(anemOcc_2015W_TamD$Var1), 1)
+
+# Visca
+anemOcc_2015W_Vis <- findCompOccupancyByYear(2015, winter_2015, dives_2015, (allanems %>% filter(site == site_vec[17])))
+anemOcc_2015W_Vis$Site <- rep(site_vec[17], length(anemOcc_2015W_Vis$Var1), 1)
+
+# Wangag
+anemOcc_2015W_Wan <- findCompOccupancyByYear(2015, winter_2015, dives_2015, (allanems %>% filter(site == site_vec[18])))
+anemOcc_2015W_Wan$Site <- rep(site_vec[18], length(anemOcc_2015W_Wan$Var1), 1)
+
+# put all together
+anemOcc_2015Wbysite <- rbind(anemOcc_2015W_Cab, anemOcc_2015W_CarC, anemOcc_2015W_CarP, anemOcc_2015W_Ele, anemOcc_2015W_Gab,
+                             anemOcc_2015W_Hai, anemOcc_2015W_Hic, anemOcc_2015W_Mag, anemOcc_2015W_Pal, anemOcc_2015W_PorR,
+                             anemOcc_2015W_PorSF, anemOcc_2015W_SanA, anemOcc_2015W_SitB, anemOcc_2015W_TamD, anemOcc_2015W_Vis,
+                             anemOcc_2015W_Wan)
 # ########### OLD CODE BELOW HERE
 # 
 # anems_2015_distinctmostly <- anems_all_2015 %>% distinct(anem_table_id, dive_table_id, anem_id, anem_obs, old_anem_id, anem_spp, obs_time, fish_spp, dive_type, date, site, gps, year)
@@ -289,6 +370,25 @@ anemOcc <- rbind(anemOcc_2012, anemOcc_2013, anemOcc_2013_no0, anemOcc_2014, ane
 
 
 #################### Plots ####################
+# 2015 Winter survey only, by site
+pdf(file = here("Plots/Occupancy", "OccupancyBreakdownBySppandSite_2015W_Freq.pdf")) #raw counts
+ggplot(data=anemOcc_2015Wbysite, aes(x=Var1, y=Freq, fill=Var1)) +
+  geom_col() +
+  labs(x='species',y='# anemones') +
+  ggtitle('2015 anemones') +
+  facet_grid(.~ Site) +
+  theme_bw() 
+dev.off()
+
+pdf(file = here("Plots/Occupancy", "OccupancyBreakdownBySppandSite_2015W_Freq.pdf")) #raw counts
+ggplot(data=anemOcc_2015Wbysite, aes(x=Var1, y=Perc, col=Var1)) +
+  geom_bar(position = 'stack') +
+  labs(x='species',y='# anemones') +
+  ggtitle('2015 anemones') +
+  facet_grid(.~ Site) +
+  theme_bw() 
+dev.off()
+
 # Breakdown of anemone occupancy by species in 2015 (>100% coverage b/c a few anemones occupied by two spp)
 pdf(file = here("Plots/Occupancy", "OccupancyBreakdownBySpp2015_Freq.pdf")) # raw counts
 ggplot(data=anemOcc_2015, aes(x=Var1, y=Freq)) +
