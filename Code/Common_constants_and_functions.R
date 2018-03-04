@@ -47,3 +47,22 @@ makeYearlyColNames <- function(start.Year, end.Year, descriptor) { #start.Year i
   }
   return(out)
 }
+
+# #################### Pull out database info and save: ####################
+# leyte <- read_db("Leyte") 
+# 
+# anem_db <- leyte %>% tbl("anemones") %>% collect()
+# fish_db <- leyte %>% tbl("clownfish") %>% collect()
+# dives_db <- leyte %>% tbl("diveinfo") %>% collect()
+# gps_db <- leyte %>% tbl("GPX") %>% collect()
+# 
+# save(leyte, file = here("Data", "leyte.RData"))
+# save(anem_db, file = here("Data", "anem_db.RData"))
+# save(fish_db, file = here("Data", "fish_db.RData"))
+# save(dives_db, file = here("Data", "dives_db.RData"))
+# save(gps_db, file = here("Data", "gps_db.RData"))
+# 
+# load(file = here("Data", "anem_db.RData"))
+# load(file = here("Data", "fish_db.RData"))
+# load(file = here("Data", "dives_db.RData"))
+# load(file = here("Data", "gps_db.RData"))
