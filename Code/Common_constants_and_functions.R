@@ -26,8 +26,11 @@ Visca <- 17
 Wangag <- 18
 
 #tagging and fin-clipping thresholds
-min_tag_size <- 3.5 #minimum size for fin-clip 
-min_clip_size <- 6.0 #minimum size for tagging 
+min_tag_size <- 6.0 #minimum size for tagging   
+min_clip_size <- 3.5 #minimum size for fin-clip
+
+#first anemone tag in 2018
+tag1_2018 <- 2938
 
 #################### Functions: ####################
 #function to make vector of strings for column names for something done each year (like columns for sampling each year or minimum distance sampled to each anem each year, etc.)
@@ -46,6 +49,12 @@ makeYearlyColNames <- function(start.Year, end.Year, descriptor) { #start.Year i
     }
   }
   return(out)
+}
+
+# Finds the real parameter estimate from the logit estimate
+logit_recip <- function(logitval) {
+  recip = (exp(logitval))/(1 + exp(logitval))
+  return(recip)
 }
 
 # #################### Pull out database info and save: ####################
