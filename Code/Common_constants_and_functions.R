@@ -32,6 +32,9 @@ min_clip_size <- 3.5 #minimum size for fin-clip
 #first anemone tag in 2018
 tag1_2018 <- 2938
 
+#first metal anemone tag number (from May 2015)
+first_metal_tag <- 2001 #based on AD guess from looking @ database, emailed Michelle and Malin to confirm
+
 #################### Functions: ####################
 #function to make vector of strings for column names for something done each year (like columns for sampling each year or minimum distance sampled to each anem each year, etc.)
 makeYearlyColNames <- function(start.Year, end.Year, descriptor) { #start.Year is first year of sampling, end.Year is final year of sampling, descriptor is string to go before year in column name (like "min_dist_" if want columns like "min_dist_2012")
