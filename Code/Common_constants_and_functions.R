@@ -32,8 +32,15 @@ min_clip_size <- 3.5 #minimum size for fin-clip
 #first anemone tag in 2018
 tag1_2018 <- 2938
 
-#first metal anemone tag number (from May 2015)
-first_metal_tag <- 2001 #based on AD guess from looking @ database, emailed Michelle and Malin to confirm
+#first metal anemone tag number (started using in May 2015)
+first_metal_tag <- 2001 
+
+#number of years sampled
+years_sampled <- c(2012, 2013, 2014, 2015, 2016, 2017, 2018)
+
+#winter months
+winter_months <- c(1,2) #to pull out winter 2015 surveys - check that they didn't go into March too
+spring_months <- c(3,4,5,6) #to pull out non-winter 2015 surveys - check that none went into July
 
 #################### Functions: ####################
 #function to make vector of strings for column names for something done each year (like columns for sampling each year or minimum distance sampled to each anem each year, etc.)
