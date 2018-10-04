@@ -43,6 +43,10 @@ years_sampled <- c(2012, 2013, 2014, 2015, 2016, 2017, 2018)
 winter_months <- c(1,2) #to pull out winter 2015 surveys - check that they didn't go into March too
 spring_months <- c(3,4,5,6,7) #to pull out non-winter 2015 surveys
 
+#recaptured fish known to be caught at two or more sites (been checked for typos)
+multiple_site_recaps <- data.frame(tag_id = c('982000411818588', '982000411818610', '985153000401241'),
+                                   gen_id = c(NA, NA, NA))
+
 #################### Functions: ####################
 #function to make vector of strings for column names for something done each year (like columns for sampling each year or minimum distance sampled to each anem each year, etc.)
 makeYearlyColNames <- function(start.Year, end.Year, descriptor) { #start.Year is first year of sampling, end.Year is final year of sampling, descriptor is string to go before year in column name (like "min_dist_" if want columns like "min_dist_2012")
