@@ -4,7 +4,7 @@
 #################### Constants, indices, etc. ####################
 ##### Vector and indices to reference sites easily in plots and filtering and such (can call things like site_vec[Cabatoan] or site_vec[1]))
 site_vec <- c("Cabatoan", "Caridad Cemetery", "Caridad Proper", "Elementary School", "Gabas", "Haina", "Hicgop South",
-              "Magbangon", "Palanas", "Poroc Rose", "Poroc San Flower", "San Agustin", "Sitio Baybayon", "Sitio Lonas", 
+              "N. Magbangon", "S. Magbangon", "Palanas", "Poroc Rose", "Poroc San Flower", "San Agustin", "Sitio Baybayon", "Sitio Lonas", 
               "Sitio Tugas", "Tamakin Dacot", "Visca", "Wangag")
 Cabatoan <- 1
 CaridadCemetery <- 2
@@ -13,17 +13,18 @@ ElementarySchool <- 4
 Gabas <- 5
 Haina <- 6
 HicgopSouth <- 7
-Magbangon <- 8
-Palanas <- 9
-PorocRose <- 10
-PorocSanFlower <- 11
-SanAgustin <- 12
-SitioBaybayon <- 13
-SitioLonas <- 14
-SitioTugas <- 15
-TamakinDacot <- 16
-Visca <- 17
-Wangag <- 18
+N_Magbangon <- 8
+S_Magbangon <- 9
+Palanas <- 10
+PorocRose <- 11
+PorocSanFlower <- 12
+SanAgustin <- 13
+SitioBaybayon <- 14
+SitioLonas <- 15
+SitioTugas <- 16
+TamakinDacot <- 17
+Visca <- 18
+Wangag <- 19
 
 #tagging and fin-clipping thresholds
 min_tag_size <- 6.0 #minimum size for tagging   
