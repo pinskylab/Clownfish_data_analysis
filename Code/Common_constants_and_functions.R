@@ -30,6 +30,12 @@ Wangag <- 19
 min_tag_size <- 6.0 #minimum size for tagging   
 min_clip_size <- 3.5 #minimum size for fin-clip
 
+#size thresholds for determining stage (just made up based on gut for now) - update based on data - Michelle has a boxplot somewhere?
+min_breeding_F_size <- 6
+min_breeding_M_size <- 6
+breeding_F_YR_cutoff <- 9 #for now, saying if a fish is greater than 9cm but marked YR, probably a female
+female_size_cutoff <- 10 #for now, saying if a fish is >10cm but we don't know anything about the color, probably a female
+
 #first anemone tag in 2018
 tag1_2018 <- 2938
 
