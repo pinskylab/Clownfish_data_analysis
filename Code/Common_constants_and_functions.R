@@ -26,6 +26,12 @@ TamakinDacot <- 17
 Visca <- 18
 Wangag <- 19
 
+#vector of sites from north to south
+site_vec_NS <- c('Palanas', 'Wangag', 'N. Magbangon', 'S. Magbangon' , 'Cabatoan',
+                 'Caridad Cemetery', 'Caridad Proper', 'Sitio Hicgop', 'Hicgop South',
+                 'Sitio Tugas', 'Elementary School', 'Sitio Lonas', 'San Agustin',
+                 'Poroc San Flower', 'Poroc Rose', 'Visca', 'Gabas', 'Tamakin Dacot',
+                 'Haina', 'Sitio Baybayon')
 #tagging and fin-clipping thresholds
 min_tag_size <- 6.0 #minimum size for tagging   
 min_clip_size <- 3.5 #minimum size for fin-clip
