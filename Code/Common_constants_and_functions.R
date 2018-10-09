@@ -151,7 +151,39 @@ attach2018anems <- function(anemdf) {
   return(out)
 }
 
-
+# Function to find the lat and long for an anem_id (based off of Michelle's sample_latlon function) - copied from AnemLocations.R
+anemid_latlong <- function(anem.table.id, anem.df, latlondata) { #anem.table.id is one anem_table_id value, anem.df is the anem.Processed data frame (so don't have to pull from db again here), latlondata is table of GPX data from database (rather than making the function call it each time); will need to think a bit more clearly about how to handle different locations read for different visits to the same anem_id (or different with same anem_obs); for now, just letting every row in anem.Info get a lat-long
+  
+  #this is what causes the multiple entries - pulls multiple rows for a few anems (81) that have multiple entries for the same anem_table_id in the database
+  anem <- anem.df %>% 
+    filter(anem_table_id == anem.table.id) %>% #get the relevant dive, time, site, etc. info for this anem_table_id
+    distinct(anem_table_id, .keep_all = TRUE) #added this in to get remove multiple entries that exist for some 2018 anem_table_ids
+  
+  # find the lat long for this anem observation
+  latloninfo <- latlondata %>%
+    filter(date %in% anem$date & unit == anem$gps) %>% #filter out just the GPS unit associated with this anem observation (added since previous time)
+    filter(hour == anem$hour & min == anem$min) %>%
+    mutate(lat = as.numeric(lat)) %>%
+    mutate(lon = as.numeric(lon))
+  
+  #pull duplicates (so if sat in one place for enough time that multiple readings recorded there)
+  #(there are more digits in the lats and lons than show up on the screen so sometimes things look like duplicates but aren't)
+  dups_lat <- which(duplicated(latloninfo$lat)) #vector of positions of duplicate values 
+  dups_lon <- which(duplicated(latloninfo$lon))
+  
+  #either take the mean of the lat/lon readings or the duplicated values, depending if there are duplicate points
+  if(length(dups_lat) == 0) { #if all latitude points are different
+    anem$lat <- round(mean(latloninfo$lat), digits = 5) #take the mean of the latitude values (digits = 5 b/c that is what Michelle had)
+    anem$lon <- round(mean(latloninfo$lon), digits = 5) #take the mean of the longitude values
+  }else{
+    anem$lat <- latloninfo$lat[dups_lat[1]] #if are duplicates, take the value of the first duplicated point
+    anem$lon <- latloninfo$lon[dups_lon[1]]
+    print(paste("Dups in lat lons at anem_table_id", anem$anem_table_id, "on", anem$date, "with lat", anem$lat, sep = " ")) #just have this while trouble-shooting repeat entries in the database
+  }
+  
+  return(anem)
+  
+}
 # #################### Pull out database info and save: ####################
 # leyte <- read_db("Leyte") 
 # 
