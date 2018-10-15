@@ -27,11 +27,24 @@ Visca <- 18
 Wangag <- 19
 
 #vector of sites from north to south
+# this one has Sitio Hicgop in in, which as far as I can tell doesn't have any fish associated to it in the db
+# site_vec_NS <- c('Palanas', 'Wangag', 'N. Magbangon', 'S. Magbangon' , 'Cabatoan',
+#                  'Caridad Cemetery', 'Caridad Proper', 'Sitio Hicgop', 'Hicgop South',
+#                  'Sitio Tugas', 'Elementary School', 'Sitio Lonas', 'San Agustin',
+#                  'Poroc San Flower', 'Poroc Rose', 'Visca', 'Gabas', 'Tamakin Dacot',
+#                  'Haina', 'Sitio Baybayon')
+
 site_vec_NS <- c('Palanas', 'Wangag', 'N. Magbangon', 'S. Magbangon' , 'Cabatoan',
-                 'Caridad Cemetery', 'Caridad Proper', 'Sitio Hicgop', 'Hicgop South',
+                 'Caridad Cemetery', 'Caridad Proper', 'Hicgop South',
                  'Sitio Tugas', 'Elementary School', 'Sitio Lonas', 'San Agustin',
                  'Poroc San Flower', 'Poroc Rose', 'Visca', 'Gabas', 'Tamakin Dacot',
                  'Haina', 'Sitio Baybayon')
+
+# data frame with site names and order alphabetically and geographically (N-S)
+site_vec_order <- data.frame(site_name = site_vec)
+site_vec_order$alpha_order <- seq(1:length(site_vec))
+site_vec_order$geo_order <- c(5, 6, 7, 10, 16, 18, 8, 3, 4, 1, 14, 13, 12, 19, 11, 9, 17, 15, 2)
+  
 #tagging and fin-clipping thresholds
 min_tag_size <- 6.0 #minimum size for tagging   
 min_clip_size <- 3.5 #minimum size for fin-clip
